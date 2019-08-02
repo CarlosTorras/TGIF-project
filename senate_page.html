@@ -2,30 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Propublica Index</title>
+    <title>113 Seante of Congress</title>
   </head>
 
   <body>
-    <nav>
-      <div>
-        <div>
-          <a href="#">TGIF</a>
-        </div>
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li>
-            <a href="#">Congress 113</a>
-            <ul>
-              <li><a href="./senate_page.html">Senate</a></li>
-              <li><a href="./house_page.html">House</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
     <header>
       <div></div>
+      <nav>
+        <div>
+          <div>
+            <a href="./img/tgif_logo.png">TGIF</a>
+          </div>
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li>
+              <a href="#">Congress 113</a>
+              <ul>
+                <li><a href="./senate_page.html">Senate</a></li>
+                <li><a href="./house_page.html">House</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
     <!--Table container-->
     <div>
@@ -42,79 +41,24 @@
         uniformed officers, as well as trial of federal officials impeached by
         the House.
       </p>
+
       <table>
         <thead>
           <tr>
-            <th>Members</th>
-            <th>First name</th>
-            <th>Middle name</th>
-            <th>Last name</th>
+            <th>Full name</th>
             <th>Party</th>
-            <th>Total votes</th>
+            <th>State</th>
+            <th>Seniority</th>
+            <th>Total votes (%)</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Lamar</td>
-            <td></td>
-            <td>Alexander</td>
-            <td>R</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Kelly</td>
-            <td>null</td>
-            <td>Ayotte</td>
-            <td>R</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Roy</td>
-            <td></td>
-            <td>Blunt</td>
-            <td>R</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Barbara</td>
-            <td>null</td>
-            <td>Boxer</td>
-            <td>D</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Sherrod</td>
-            <td></td>
-            <td>Brown</td>
-            <td>D</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Richard</td>
-            <td>M.</td>
-            <td>Burr</td>
-            <td>R</td>
-            <td>657</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Tammy</td>
-            <td>null</td>
-            <td>Baldwin</td>
-            <td>D</td>
-            <td>657</td>
-          </tr>
-        </tbody>
+        <tbody id="senate-data"></tbody>
       </table>
     </div>
     <footer>
       <p>&copy; 2016 TGIF: All Rights Reserved</p>
     </footer>
   </body>
+  <script src="./javascript/pro_congress_113_senate.js"></script>
+  <script src="./javascript/senate_table.js"></script>
 </html>
