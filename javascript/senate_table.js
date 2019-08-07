@@ -13,7 +13,7 @@ function printtable(array, id) {
     let totalvotescell = document.createElement("td");
     var fullname = array[i].last_name + " " + array[i].first_name;
     if (array[i].middle_name !== null) {
-      fullnamecell.innerHTML += " " + array[i].middle_name;
+      fullname += " " + array[i].middle_name;
     }
 
     fullnamecell.innerHTML = fullname.link(array[i].url);

@@ -16,7 +16,7 @@
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
-    <title>113 Seante of Congress</title>
+    <title>House Attendance page</title>
   </head>
 
   <body>
@@ -35,7 +35,6 @@
             >
           </div>
         </div>
-
         <nav
           class="navbar navbar-expand-sm bg-light navbar-light border border-dark"
         >
@@ -46,22 +45,20 @@
               </li>
               <li class="nav-item dropdown">
                 <a
-                  class="active nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle"
                   data-toggle="dropdown"
                   href="#"
                   id="navbardrop"
                   >Congress 113<span class="caret"></span
                 ></a>
                 <div class="dropdown-menu">
-                  <a class="active dropdown-item" href="./senate_page.html"
-                    >Senate</a
-                  >
+                  <a class="dropdown-item" href="./senate_page.html">Senate</a>
                   <a class="dropdown-item" href="./house_page.html">House</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
                 <a
-                  class="nav-link dropdown-toggle"
+                  class="active nav-link dropdown-toggle"
                   data-toggle="dropdown"
                   href="#"
                   id="navbardrop"
@@ -71,7 +68,9 @@
                   <a class="dropdown-item" href="./senate_attendance_page.html"
                     >Senate</a
                   >
-                  <a class="dropdown-item" href="./house_attendance_page.html"
+                  <a
+                    class="active dropdown-item"
+                    href="./house_attendance_page.html"
                     >House</a
                   >
                 </div>
@@ -104,38 +103,149 @@
       </header>
       <!--Table container-->
       <div>
-        <h2>Senators</h2>
+        <h2>Attendance</h2>
         <p>
-          First convened in 1789, the composition and powers of the Senate are
-          established in Article One of the U.S. Constitution. Each state is
-          represented by two senators, regardless of population, who serve
-          staggered six-year terms. The Senate has several exclusive powers not
-          granted to the House, including consenting to treaties as a
-          precondition to their ratification and consenting to or confirming
-          appointments of Cabinet secretaries, federal judges, other federal
-          executive officials, military officers, regulatory officials,
-          ambassadors, and other federal uniformed officers, as well as trial of
-          federal officials impeached by the House.
+          The Constitution specifies that a majority of members constitutes a
+          quorum to do business in each house. Representatives and senators
+          rarely force the presence of a quorum by demanding quorum calls; thus,
+          in most cases, debates continue even if a majority is not present.
         </p>
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Full name</th>
-                <th scope="col">Party</th>
-                <th scope="col">State</th>
-                <th scope="col">Seniority</th>
-                <th scope="col">Total votes (%)</th>
-              </tr>
-            </thead>
-            <tbody id="senate-data"></tbody>
-          </table>
-        </div>
+
+        <p>
+          The Senate uses roll-call votes; a clerk calls out the names of all
+          the senators, each senator stating "aye" or "no" when his or her name
+          is announced. The House reserves roll-call votes for the most formal
+          matters, as a roll-call of all 435 representatives takes quite some
+          time; normally, members vote by electronic device. In the case of a
+          tie, the motion in question fails. In the Senate, the Vice President
+          may (if present) cast the tiebreaking vote.
+        </p>
+
+        <h2>Senate at a glance</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Party</th>
+              <th>Number of Reps</th>
+              <th>% Voted with Prty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Republican</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>Democrat</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>Independent</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Least Engaged (Bottom 10% Attendance)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of Missed Votes</th>
+              <th>% Missed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Most Engaged (Top 10% Attendance)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of Missed Votes</th>
+              <th>% Missed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <footer
         class="footer-copyright d-flex justify-content-center align-items-center border border-dark"
       >
-        <p>&copy; 2016 TGIF: All Rights Reserved</p>
+        <p>
+          &copy; 2016 TGIF | All Rights Reserved
+        </p>
       </footer>
     </div>
     <script
@@ -153,7 +263,5 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="./javascript/pro_congress_113_senate.js"></script>
-    <script src="./javascript/senate_table.js"></script>
   </body>
 </html>
