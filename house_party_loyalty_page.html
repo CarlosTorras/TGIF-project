@@ -114,26 +114,26 @@
         <table>
           <thead>
             <tr>
-              <th>Party</th>
-              <th>Number of Reps</th>
-              <th>% Voted with Prty</th>
+              <th scope="col">Party</th>
+              <th scope="col">Number of Reps</th>
+              <th scope="col">% Voted with Prty</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="house_glance">
             <tr>
               <td>Republican</td>
-              <td>--</td>
-              <td>--</td>
+              <td id="repnumbers">--</td>
+              <td id="repvotes">--</td>
             </tr>
             <tr>
               <td>Democrat</td>
-              <td>--</td>
-              <td>--</td>
+              <td id="demnumbers">--</td>
+              <td id="demvotes">--</td>
             </tr>
             <tr>
               <td>Independent</td>
-              <td>--</td>
-              <td>--</td>
+              <td id="indnumbers">--</td>
+              <td id="indvotes">--</td>
             </tr>
           </tbody>
         </table>
@@ -142,91 +142,24 @@
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Number Party Votes</th>
-              <th>% Party Votes</th>
+              <th scope="col">Name</th>
+              <th scope="col">Number Party Votes</th>
+              <th scope="col">% Party Votes</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-          </tbody>
+          <tbody id="leastloyal"></tbody>
         </table>
 
         <h2>Most Loyal (Top 10% of Party)</h2>
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Number Party Votes</th>
-              <th>% Party Votes</th>
+              <th scope="col">Name</th>
+              <th scope="col">Number Party Votes</th>
+              <th scope="col">% Party Votes</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-            <tr>
-              <td>--</td>
-              <td>--</td>
-              <td>--</td>
-            </tr>
-          </tbody>
+          <tbody id="mostloyal"></tbody>
         </table>
       </div>
       <footer
@@ -252,5 +185,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="./javascript/pro_congress_113_house.js"></script>
+    <script src="./javascript/house_party_loyalty.js"></script>
   </body>
 </html>

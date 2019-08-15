@@ -6,9 +6,9 @@ var statistics = {
   demvoteswparty: 0,
   repvoteswparty: 0,
   indvoteswparty: 0,
-  attendance: 0
+  leastloyal: 0,
+  mostloyal: 0
 };
-
 let membersarray = data.results[0].members;
 
 memberscount(membersarray);
@@ -38,10 +38,9 @@ function memberscount(array) {
   statistics.total = demlist.length + replist.length + indlist.length;
 }
 
-//For the table Senate at a glance
+//For the table House at a glance
 
 voteswparty(membersarray);
-
 function voteswparty(array) {
   var demsum = 0;
   var repsum = 0;
@@ -62,7 +61,7 @@ function voteswparty(array) {
   statistics.indvoteswparty = indsum / statistics.independents;
 }
 
-//Table for senate at a glance
+//Table for House at a glance
 table2();
 
 function table2() {
@@ -74,73 +73,62 @@ function table2() {
   indvotes.innerHTML = statistics.indvoteswparty.toFixed(2) + "%";
 }
 
-//NEED TO FIX
-
-//Array for attendance
-attendarray(membersarray);
-
-function attendarray(array) {
-  var arr = [];
-
-  for (i = 0; i < array.length; i++) {
-    var fullname = array[i].first_name + " " + array[i].last_name;
-    if (array[i].middle_name !== null) {
-      fullname += " " + array[i].middle_name;
-    }
-
-    arr.push({
-      name: fullname,
-      missedvotes: array[i].missed_votes,
-      missedvotespct: array[i].missed_votes_pct
-    });
-  }
-
-  arr.sort(compare);
-
-  statistics.attendance = arr;
-}
-
-function compare(a, b) {
-  if (a.missedvotespct < b.missedvotespct) {
+//Table for least loyal
+function compare2(a, b) {
+  if (a.votes_with_party_pct < b.votes_with_party_pct) {
     return -1;
   }
-  if (a.missedvotespct > b.missedvotespct) {
+  if (a.votes_with_party_pct > b.votes_with_party_pct) {
     return 1;
   }
   return 0;
 }
+leastloyalarr(membersarray);
 
-console.log(statistics);
-//Table for attendance (top 10%)
+function leastloyalarr(array) {
+  array.sort(compare2);
 
-attendtable(statistics.attendance, "mostengaged");
-
-function attendtable(array, id) {
+  var arr = [];
   var tenpct = Math.round(array.length * 0.1);
-  var tenpctarr = [];
+
   for (i = 0; i < tenpct; i++) {
-    tenpctarr.push(array[i]);
+    arr.push(array[i]);
   }
 
   for (let i = tenpct + 1; i < array.length; i++) {
     if (
-      array[i].missedvotespct == tenpctarr[tenpctarr.length - 1].missedvotespct
+      array[i].votes_with_party_pct == arr[arr.length - 1].votes_with_party_pct
     ) {
-      tenpctarr.push(array[i]);
+      arr.push(array[i]);
     }
   }
 
+  statistics.leastloyal = arr;
+}
+
+lloyaltable(statistics.leastloyal, "leastloyal");
+function lloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
-  for (let i = 0; i < tenpctarr.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let row = document.createElement("tr");
     let fullnamecell = document.createElement("td");
     let missedvotescell = document.createElement("td");
     let missedprctcell = document.createElement("td");
 
-    fullnamecell.innerHTML = tenpctarr[i].name;
-    missedvotescell.innerHTML = tenpctarr[i].missedvotes;
-    missedprctcell.innerHTML = tenpctarr[i].missedvotespct + "%";
+    var name = array[i].first_name + " " + array[i].last_name;
+    if (array[i].middle_name !== null) {
+      name += " " + array[i].middle_name;
+    }
+    var votes_w_party = Math.round(
+      ((array[i].total_votes - array[i].missed_votes) *
+        array[i].votes_with_party_pct) /
+        100
+    );
+
+    fullnamecell.innerHTML = name;
+    missedvotescell.innerHTML = votes_w_party;
+    missedprctcell.innerHTML = array[i].votes_with_party_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 
@@ -148,57 +136,62 @@ function attendtable(array, id) {
   }
 }
 
-//END OF NEED TO FIX
+//Table for most loyal
 
-//Table for the least engaged
-
-function compare2(a, b) {
-  if (a.missed_votes_pct < b.missed_votes_pct) {
+function compareback(a, b) {
+  if (a.votes_with_party_pct > b.votes_with_party_pct) {
     return -1;
   }
-  if (a.missed_votes_pct > b.missed_votes_pct) {
+  if (a.votes_with_party_pct < b.votes_with_party_pct) {
     return 1;
   }
   return 0;
 }
+mostloyalarr(membersarray);
+function mostloyalarr(array) {
+  array.sort(compareback);
 
-attendtable2(membersarray, "leastengaged");
-
-function attendtable2(array, id) {
-  array.sort(compare2);
-
+  var arr = [];
   var tenpct = Math.round(array.length * 0.1);
-  var tenpctarr = [];
-  for (i = array.length - 1; i >= array.length - tenpct; i--) {
-    tenpctarr.push(array[i]);
-  }
-  console.log(tenpctarr);
 
-  for (let i = array.length - tenpct; i > 0; i--) {
+  for (i = 0; i < tenpct; i++) {
+    arr.push(array[i]);
+  }
+
+  for (let i = tenpct + 1; i < array.length; i++) {
     if (
-      array[i].missed_votes_pct ==
-      tenpctarr[tenpctarr.length - 1].missed_votes_pct
+      array[i].votes_with_party_pct == arr[arr.length - 1].votes_with_party_pct
     ) {
-      tenpctarr.push(array[i]);
+      arr.push(array[i]);
     }
   }
 
+  statistics.mostloyal = arr;
+}
+
+mloyaltable(statistics.mostloyal, "mostloyal");
+function mloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
-  for (let i = 0; i < tenpctarr.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let row = document.createElement("tr");
     let fullnamecell = document.createElement("td");
     let missedvotescell = document.createElement("td");
     let missedprctcell = document.createElement("td");
 
-    var name2 = array[i].first_name + " " + array[i].last_name;
+    var name = array[i].first_name + " " + array[i].last_name;
     if (array[i].middle_name !== null) {
       name += " " + array[i].middle_name;
     }
+    var votes_w_party = Math.round(
+      ((array[i].total_votes - array[i].missed_votes) *
+        array[i].votes_with_party_pct) /
+        100
+    );
 
-    fullnamecell.innerHTML = name2;
-    missedvotescell.innerHTML = tenpctarr[i].missed_votes;
-    missedprctcell.innerHTML = tenpctarr[i].missed_votes_pct + "%";
+    fullnamecell.innerHTML = name;
+    missedvotescell.innerHTML = votes_w_party;
+    missedprctcell.innerHTML = array[i].votes_with_party_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 
