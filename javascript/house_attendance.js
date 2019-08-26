@@ -62,7 +62,13 @@ function voteswparty(array) {
   statistics.repvoteswparty = repsum / statistics.republicans;
   statistics.indvoteswparty = indsum / statistics.independents;
 }
+for (const key in statistics) {
+  console.log(statistics[key]);
 
+  if (isNaN(statistics[key])) {
+    statistics[key] = 0;
+  }
+}
 //Table for House at a glance
 table2();
 
@@ -78,10 +84,10 @@ function table2() {
 //Table for least engaged
 
 function compare(a, b) {
-  if (a.missed_votes_pct < b.missed_votes_pct) {
+  if (a.missed_votes_pct > b.missed_votes_pct) {
     return -1;
   }
-  if (a.missed_votes_pct > b.missed_votes_pct) {
+  if (a.missed_votes_pct < b.missed_votes_pct) {
     return 1;
   }
   return 0;
@@ -94,13 +100,16 @@ function statsleastengaged(array) {
 
   var tenpct = Math.round(array.length * 0.1);
   var arr = [];
-  for (i = array.length - 1; i >= array.length - tenpct; i--) {
+  for (i = 0; i < tenpct; i++) {
     arr.push(array[i]);
   }
   console.log(arr);
 
-  for (let i = array.length - tenpct; i > 0; i--) {
-    if (array[i].missed_votes_pct == arr[arr.length - 1].missed_votes_pct) {
+  for (let i = tenpct - 1; i < array.length; i++) {
+    if (
+      array[i].missed_votes_pct == arr[arr.length - 1].missed_votes_pct &&
+      array[i].first_name !== arr[arr.length - 1].first_name
+    ) {
       arr.push(array[i]);
     }
   }
@@ -136,10 +145,10 @@ function leastengaged(array, id) {
 //Table for most engaged
 
 function compare2(a, b) {
-  if (a.missed_votes_pct > b.missed_votes_pct) {
+  if (a.missed_votes_pct < b.missed_votes_pct) {
     return -1;
   }
-  if (a.missed_votes_pct < b.missed_votes_pct) {
+  if (a.missed_votes_pct > b.missed_votes_pct) {
     return 1;
   }
   return 0;
@@ -152,15 +161,16 @@ function statsmostengaged(array) {
 
   var tenpct = Math.round(array.length * 0.1);
   var tenpctarr = [];
-  for (i = array.length - 1; i >= array.length - tenpct; i--) {
+  for (i = 0; i < tenpct; i++) {
     tenpctarr.push(array[i]);
   }
   console.log(tenpctarr);
 
-  for (let i = array.length - tenpct; i > 0; i--) {
+  for (let i = tenpct - 1; i < array.length; i++) {
     if (
       array[i].missed_votes_pct ==
-      tenpctarr[tenpctarr.length - 1].missed_votes_pct
+        tenpctarr[tenpctarr.length - 1].missed_votes_pct &&
+      array[i].first_name !== tenpctarr[tenpctarr.length - 1].first_name
     ) {
       tenpctarr.push(array[i]);
     }

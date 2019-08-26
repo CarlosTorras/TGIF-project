@@ -6,7 +6,8 @@ var statistics = {
   demvoteswparty: 0,
   repvoteswparty: 0,
   indvoteswparty: 0,
-  attendance: 0
+  mostengaged: 0,
+  leastengaged: 0
 };
 
 let membersarray = data.results[0].members;
@@ -74,73 +75,60 @@ function table2() {
   indvotes.innerHTML = statistics.indvoteswparty.toFixed(2) + "%";
 }
 
-//NEED TO FIX
-
-//Array for attendance
-attendarray(membersarray);
-
-function attendarray(array) {
-  var arr = [];
-
-  for (i = 0; i < array.length; i++) {
-    var fullname = array[i].first_name + " " + array[i].last_name;
-    if (array[i].middle_name !== null) {
-      fullname += " " + array[i].middle_name;
-    }
-
-    arr.push({
-      name: fullname,
-      missedvotes: array[i].missed_votes,
-      missedvotespct: array[i].missed_votes_pct
-    });
-  }
-
-  arr.sort(compare);
-
-  statistics.attendance = arr;
-}
+//Table for least engaged
 
 function compare(a, b) {
-  if (a.missedvotespct < b.missedvotespct) {
+  if (a.missed_votes_pct > b.missed_votes_pct) {
     return -1;
   }
-  if (a.missedvotespct > b.missedvotespct) {
+  if (a.missed_votes_pct < b.missed_votes_pct) {
     return 1;
   }
   return 0;
 }
 
-console.log(statistics);
-//Table for attendance (top 10%)
+statsleastengaged(membersarray);
 
-attendtable(statistics.attendance, "mostengaged");
+function statsleastengaged(array) {
+  array.sort(compare);
 
-function attendtable(array, id) {
   var tenpct = Math.round(array.length * 0.1);
-  var tenpctarr = [];
+  var arr = [];
   for (i = 0; i < tenpct; i++) {
-    tenpctarr.push(array[i]);
+    arr.push(array[i]);
   }
+  console.log(arr);
 
-  for (let i = tenpct + 1; i < array.length; i++) {
+  for (let i = tenpct - 1; i < array.length; i++) {
     if (
-      array[i].missedvotespct == tenpctarr[tenpctarr.length - 1].missedvotespct
+      array[i].missed_votes_pct == arr[arr.length - 1].missed_votes_pct &&
+      array[i].first_name !== arr[arr.length - 1].first_name
     ) {
-      tenpctarr.push(array[i]);
+      arr.push(array[i]);
     }
   }
+  statistics.leastengaged = arr;
+}
 
+leastengaged(statistics.leastengaged, "leastengaged");
+
+function leastengaged(array, id) {
   let tbody = document.getElementById(id);
 
-  for (let i = 0; i < tenpctarr.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let row = document.createElement("tr");
     let fullnamecell = document.createElement("td");
     let missedvotescell = document.createElement("td");
     let missedprctcell = document.createElement("td");
 
-    fullnamecell.innerHTML = tenpctarr[i].name;
-    missedvotescell.innerHTML = tenpctarr[i].missedvotes;
-    missedprctcell.innerHTML = tenpctarr[i].missedvotespct + "%";
+    var name = array[i].first_name + " " + array[i].last_name;
+    if (array[i].middle_name !== null) {
+      name += " " + array[i].middle_name;
+    }
+
+    fullnamecell.innerHTML = name;
+    missedvotescell.innerHTML = array[i].missed_votes;
+    missedprctcell.innerHTML = array[i].missed_votes_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 
@@ -148,9 +136,7 @@ function attendtable(array, id) {
   }
 }
 
-//END OF NEED TO FIX
-
-//Table for the least engaged
+//Table for most engaged
 
 function compare2(a, b) {
   if (a.missed_votes_pct < b.missed_votes_pct) {
@@ -162,30 +148,37 @@ function compare2(a, b) {
   return 0;
 }
 
-attendtable2(membersarray, "leastengaged");
+statsmostengaged(membersarray);
 
-function attendtable2(array, id) {
+function statsmostengaged(array) {
   array.sort(compare2);
 
   var tenpct = Math.round(array.length * 0.1);
   var tenpctarr = [];
-  for (i = array.length - 1; i >= array.length - tenpct; i--) {
+  for (i = 0; i < tenpct; i++) {
     tenpctarr.push(array[i]);
   }
   console.log(tenpctarr);
 
-  for (let i = array.length - tenpct; i > 0; i--) {
+  for (let i = tenpct - 1; i < array.length; i++) {
     if (
       array[i].missed_votes_pct ==
-      tenpctarr[tenpctarr.length - 1].missed_votes_pct
+        tenpctarr[tenpctarr.length - 1].missed_votes_pct &&
+      array[i].first_name !== tenpctarr[tenpctarr.length - 1].first_name
     ) {
       tenpctarr.push(array[i]);
     }
   }
 
+  statistics.mostengaged = tenpctarr;
+}
+
+mostengaged(statistics.mostengaged, "mostengaged");
+
+function mostengaged(array, id) {
   let tbody = document.getElementById(id);
 
-  for (let i = 0; i < tenpctarr.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let row = document.createElement("tr");
     let fullnamecell = document.createElement("td");
     let missedvotescell = document.createElement("td");
@@ -197,8 +190,8 @@ function attendtable2(array, id) {
     }
 
     fullnamecell.innerHTML = name2;
-    missedvotescell.innerHTML = tenpctarr[i].missed_votes;
-    missedprctcell.innerHTML = tenpctarr[i].missed_votes_pct + "%";
+    missedvotescell.innerHTML = array[i].missed_votes;
+    missedprctcell.innerHTML = array[i].missed_votes_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 

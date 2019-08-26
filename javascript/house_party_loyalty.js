@@ -61,6 +61,14 @@ function voteswparty(array) {
   statistics.indvoteswparty = indsum / statistics.independents;
 }
 
+for (const key in statistics) {
+  console.log(statistics[key]);
+
+  if (isNaN(statistics[key])) {
+    statistics[key] = 0;
+  }
+}
+
 //Table for House at a glance
 table2();
 
