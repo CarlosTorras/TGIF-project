@@ -30,13 +30,13 @@
           />
           <div class="align-self-end">
             <a href="mailto:info@tgif.net"
-              ><i class="fas fa-envelope"></i>info@tgif.net</a
+              ><i class="fas fa-envelope"></i> info@tgif.net</a
             >
           </div>
         </div>
 
         <nav
-          class="navbar navbar-expand-sm bg-light navbar-light border border-dark"
+          class="navbar navbar-expand-sm bg-light navbar-light border border-dark shadow-sm p-2 mb-4 mt-2 rounded"
         >
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
@@ -100,8 +100,8 @@
         </nav>
       </header>
       <!--Table container-->
-      <div class="d-flex">
-        <div class="container">
+      <div class="row">
+        <div class="container col">
           <h2>About Us</h2>
           <p>
             Openness, accountability, and honesty define government
@@ -199,18 +199,21 @@
               aria-controls="collapseExample"
               onclick="show_more.style.visibility='visible';"
             >
-              Read Less
+              Hide
             </button>
           </div>
         </div>
-        <img
-          class="align-self-center"
-          src="./img/Gov_flag.jpg"
-          alt="government and flags"
-        />
+        <div class="col">
+          <img
+            class="rounded mt-5 pt-5"
+            src="./img/Gov_flag.jpg"
+            alt="government and flags"
+          />
+        </div>
       </div>
+
       <footer
-        class="footer-copyright d-flex justify-content-center align-items-center border border-dark"
+        class="footer-copyright d-flex justify-content-center align-items-center border border-dark bg-light shadow-sm p-2 mb-4 mt-4 rounded"
       >
         <p>
           &copy; 2019 TGIF | All Rights Reserved

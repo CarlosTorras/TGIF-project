@@ -32,3 +32,80 @@ function printtable(array, id) {
     tbody.append(row);
   }
 }
+
+// Filters for party & state
+
+document.getElementById("demparty").addEventListener("click", function() {
+  tablefilter("senate-data");
+});
+document.getElementById("repparty").addEventListener("click", function() {
+  tablefilter("senate-data");
+});
+document.getElementById("indparty").addEventListener("click", function() {
+  tablefilter("senate-data");
+});
+document.getElementById("ddownstate").addEventListener("change", function() {
+  tablefilter("senate-data");
+});
+
+function tablefilter(id) {
+  var table = document.getElementById(id);
+  var trrow = table.getElementsByTagName("tr");
+  var demcheck = document.getElementById("demparty").checked;
+  var repcheck = document.getElementById("repparty").checked;
+  var indcheck = document.getElementById("indparty").checked;
+  var value = document.getElementById("ddownstate").value;
+
+  for (i = 0; i < trrow.length; i++) {
+    var tdparty = trrow[i].getElementsByTagName("td")[1].innerText;
+    var tdstate = trrow[i].getElementsByTagName("td")[2].innerText;
+
+    trrow[i].style.display = "none";
+
+    if (
+      demcheck == false &&
+      repcheck == false &&
+      indcheck == false &&
+      (value == "inactive" || value == "AS")
+    ) {
+      trrow[i].style.display = "";
+    } else if (
+      demcheck == false &&
+      repcheck == false &&
+      indcheck == false &&
+      tdstate == value
+    ) {
+      trrow[i].style.display = "";
+    }
+
+    if (
+      tdparty == "D" &&
+      demcheck == true &&
+      (value == "inactive" || value == "AS")
+    ) {
+      trrow[i].style.display = "";
+    } else if (tdstate == value && tdparty == "D" && demcheck == true) {
+      trrow[i].style.display = "";
+    }
+
+    if (
+      tdparty == "R" &&
+      repcheck == true &&
+      (value == "inactive" || value == "AS")
+    ) {
+      trrow[i].style.display = "";
+    } else if (tdstate == value && tdparty == "R" && repcheck == true) {
+      trrow[i].style.display = "";
+    }
+
+    if (
+      tdparty == "I" &&
+      indcheck == true &&
+      (value == "inactive" || value == "AS")
+    ) {
+      trrow[i].style.display = "";
+    } else if (tdstate == value && tdparty == "I" && indcheck == true) {
+      trrow[i].style.display = "";
+    }
+  }
+}

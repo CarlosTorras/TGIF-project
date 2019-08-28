@@ -31,12 +31,12 @@
           />
           <div class="align-self-end">
             <a href="mailto:info@tgif.net"
-              ><i class="fas fa-envelope"></i>info@tgif.net</a
+              ><i class="fas fa-envelope"></i> info@tgif.net</a
             >
           </div>
         </div>
         <nav
-          class="navbar navbar-expand-sm bg-light navbar-light border border-dark"
+          class="navbar navbar-expand-sm bg-light navbar-light border border-dark shadow-sm p-2 mb-4 mt-2 rounded"
         >
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
@@ -103,81 +103,91 @@
       </header>
       <!--Table container-->
       <div>
-        <h2>Attendance</h2>
-        <p>
-          The Constitution specifies that a majority of members constitutes a
-          quorum to do business in each house. Representatives and senators
-          rarely force the presence of a quorum by demanding quorum calls; thus,
-          in most cases, debates continue even if a majority is not present.
-        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Attendance</h2>
+            <p>
+              The Constitution specifies that a majority of members constitutes
+              a quorum to do business in each house. Representatives and
+              senators rarely force the presence of a quorum by demanding quorum
+              calls; thus, in most cases, debates continue even if a majority is
+              not present.
+            </p>
 
-        <p>
-          The Senate uses roll-call votes; a clerk calls out the names of all
-          the senators, each senator stating "aye" or "no" when his or her name
-          is announced. The House reserves roll-call votes for the most formal
-          matters, as a roll-call of all 435 representatives takes quite some
-          time; normally, members vote by electronic device. In the case of a
-          tie, the motion in question fails. In the Senate, the Vice President
-          may (if present) cast the tiebreaking vote.
-        </p>
-        <div class="table-responsive">
-          <h2>Senate at a glance</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Party</th>
-                <th scope="col">Number of Reps</th>
-                <th scope="col">% Voted with Prty</th>
-              </tr>
-            </thead>
-            <tbody id="senate_glance">
-              <tr>
-                <td>Republican</td>
-                <td id="repnumbers">--</td>
-                <td id="repvotes">--</td>
-              </tr>
-              <tr>
-                <td>Democrat</td>
-                <td id="demnumbers">--</td>
-                <td id="demvotes">--</td>
-              </tr>
-              <tr>
-                <td>Independent</td>
-                <td id="indnumbers">--</td>
-                <td id="indvotes">--</td>
-              </tr>
-            </tbody>
-          </table>
+            <p>
+              The Senate uses roll-call votes; a clerk calls out the names of
+              all the senators, each senator stating "aye" or "no" when his or
+              her name is announced. The House reserves roll-call votes for the
+              most formal matters, as a roll-call of all 435 representatives
+              takes quite some time; normally, members vote by electronic
+              device. In the case of a tie, the motion in question fails. In the
+              Senate, the Vice President may (if present) cast the tiebreaking
+              vote.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="table-responsive">
+              <h2>Senate at a glance</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Party</th>
+                    <th scope="col">Number of Reps</th>
+                    <th scope="col">% Voted with Prty</th>
+                  </tr>
+                </thead>
+                <tbody id="senate_glance">
+                  <tr>
+                    <td>Republican</td>
+                    <td id="repnumbers">--</td>
+                    <td id="repvotes">--</td>
+                  </tr>
+                  <tr>
+                    <td>Democrat</td>
+                    <td id="demnumbers">--</td>
+                    <td id="demvotes">--</td>
+                  </tr>
+                  <tr>
+                    <td>Independent</td>
+                    <td id="indnumbers">--</td>
+                    <td id="indvotes">--</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="table-responsive">
-          <h2>Least Engaged (Bottom 10% Attendance)</h2>
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Number of Missed Votes</th>
-                <th scope="col">% Missed</th>
-              </tr>
-            </thead>
-            <tbody id="leastengaged"></tbody>
-          </table>
-        </div>
-        <div class="table-responsive">
-          <h2>Most Engaged (Top 10% Attendance)</h2>
-          <table class="table table-hover">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Number of Missed Votes</th>
-                <th scope="col">% Missed</th>
-              </tr>
-            </thead>
-            <tbody id="mostengaged"></tbody>
-          </table>
+        <div class="row">
+          <div class="table-responsive col-md-6">
+            <h2>Least Engaged (Bottom 10% Attendance)</h2>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Number of Missed Votes</th>
+                  <th scope="col">% Missed</th>
+                </tr>
+              </thead>
+              <tbody id="leastengaged"></tbody>
+            </table>
+          </div>
+          <div class="table-responsive col-md-6">
+            <h2>Most Engaged (Top 10% Attendance)</h2>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Number of Missed Votes</th>
+                  <th scope="col">% Missed</th>
+                </tr>
+              </thead>
+              <tbody id="mostengaged"></tbody>
+            </table>
+          </div>
         </div>
       </div>
       <footer
-        class="footer-copyright d-flex justify-content-center align-items-center border border-dark"
+        class="footer-copyright d-flex justify-content-center align-items-center border border-dark bg-light shadow-sm p-2 mb-4 mt-4 rounded"
       >
         <p>
           &copy; 2019 TGIF | All Rights Reserved

@@ -31,13 +31,13 @@
           />
           <div class="align-self-end">
             <a href="mailto:info@tgif.net"
-              ><i class="fas fa-envelope"></i>info@tgif.net</a
+              ><i class="fas fa-envelope"></i> info@tgif.net</a
             >
           </div>
         </div>
 
         <nav
-          class="navbar navbar-expand-sm bg-light navbar-light border border-dark"
+          class="navbar navbar-expand-sm bg-light navbar-light border border-dark shadow-sm p-2 mb-4 mt-2 rounded"
         >
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
@@ -118,25 +118,47 @@
           federal officials impeached by the House.
         </p>
         <div class="table-responsive">
-          <div class="caption">
-            <div>
-              Party:
-              <input type="checkbox" name="filterparty" id="demparty" />Democrat
-              <input
-                type="checkbox"
-                name="filterparty"
-                id="repparty"
-              />Republican
-              <input
-                type="checkbox"
-                name="filterparty"
-                id="indparty"
-              />Independent
+          <div class="caption row">
+            <div class="col-md-6">
+              Filter by Party:
+              <div class="custom-control custom-switch custom-control-inline">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  name="filterparty"
+                  id="demparty"
+                /><label class="custom-control-label" for="demparty"
+                  >Democrat</label
+                >
+              </div>
+              <div class="custom-control custom-switch custom-control-inline">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  name="filterparty"
+                  id="repparty"
+                /><label class="custom-control-label" for="repparty"
+                  >Republican</label
+                >
+              </div>
+              <div class="custom-control custom-switch custom-control-inline">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  name="filterparty"
+                  id="indparty"
+                /><label class="custom-control-label" for="indparty"
+                  >Independent</label
+                >
+              </div>
             </div>
-            <div>
-              State:
+            <div class="col-md-3 offset-md-3">
+              Filter by State:
               <select name="state" id="ddownstate" size="1S">
-                <option value selected disabled>select a state</option>
+                <option value="inactive" selected disabled
+                  >select a state</option
+                >
+                <option value="AS" id="AS">All States</option>
                 <option value="AL" id="AL">Alabama</option>
                 <option value="AK" id="AK">Alaska</option>
                 <option value="AZ" id="AZ">Arizona</option>
@@ -204,7 +226,7 @@
         </div>
       </div>
       <footer
-        class="footer-copyright d-flex justify-content-center align-items-center border border-dark"
+        class="footer-copyright d-flex justify-content-center align-items-center border border-dark bg-light shadow-sm p-2 mb-4 mt-4 rounded"
       >
         <p>&copy; 2019 TGIF: All Rights Reserved</p>
       </footer>
