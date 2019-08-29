@@ -1,6 +1,28 @@
 let membersarray = data.results[0].members;
 
-printtable(membersarray, "senate-data");
+// Start of the fetch function
+
+fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+  method: "GET",
+  headers: { "X-API-key": "ELLwJVAERTRPBpk6kEp4sHgGNdz5jwLTUG8Tq5Uq" }
+})
+  .then(function(tgif) {
+    console.log(tgif);
+    return tgif.json();
+  })
+  .then(function(tgif) {
+    console.log(tgif);
+    membersarray = tgif.results[0].members;
+    //Functions callers
+    printtable(membersarray, "senate-data");
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+// End of the fetch function
+
+// Function for House members table
 
 function printtable(array, id) {
   let tbody = document.getElementById(id);
