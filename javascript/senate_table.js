@@ -26,13 +26,14 @@ fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
 
 function printtable(array, id) {
   let tbody = document.getElementById(id);
+
   for (let i = 0; i < array.length; i++) {
-    let row = document.createElement("tr");
-    let fullnamecell = document.createElement("td");
-    let partycell = document.createElement("td");
-    let statecell = document.createElement("td");
-    let senioritycell = document.createElement("td");
-    let totalvotescell = document.createElement("td");
+    let row = tbody.insertRow(i);
+    let fullnamecell = row.insertCell(0);
+    let partycell = row.insertCell(1);
+    let statecell = row.insertCell(2);
+    let senioritycell = row.insertCell(3);
+    let totalvotescell = row.insertCell(4);
     var fullname = array[i].last_name + " " + array[i].first_name;
     if (array[i].middle_name !== null) {
       fullname += " " + array[i].middle_name;
@@ -43,16 +44,9 @@ function printtable(array, id) {
     statecell.innerHTML = array[i].state;
     senioritycell.innerHTML = array[i].seniority;
     totalvotescell.innerHTML = array[i].votes_with_party_pct + "%";
-
-    row.append(
-      fullnamecell,
-      partycell,
-      statecell,
-      senioritycell,
-      totalvotescell
-    );
-    tbody.append(row);
   }
+
+  document.getElementById("load-icon").style.display = "none";
 }
 
 // Filters for party & state

@@ -26,13 +26,14 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
 
 function printtable(array, id) {
   let tbody = document.getElementById(id);
+
   for (let i = 0; i < array.length; i++) {
-    let row = document.createElement("tr");
-    let fullnamecell = document.createElement("td");
-    let partycell = document.createElement("td");
-    let statecell = document.createElement("td");
-    let senioritycell = document.createElement("td");
-    let totalvotescell = document.createElement("td");
+    let row = tbody.insertRow(i);
+    let fullnamecell = row.insertCell(0);
+    let partycell = row.insertCell(1);
+    let statecell = row.insertCell(2);
+    let senioritycell = row.insertCell(3);
+    let totalvotescell = row.insertCell(4);
     var fullname = array[i].last_name + " " + array[i].first_name;
     if (array[i].middle_name !== null) {
       fullname += " " + array[i].middle_name;
@@ -43,16 +44,8 @@ function printtable(array, id) {
     statecell.innerHTML = array[i].state;
     senioritycell.innerHTML = array[i].seniority;
     totalvotescell.innerHTML = array[i].votes_with_party_pct + "%";
-
-    row.append(
-      fullnamecell,
-      partycell,
-      statecell,
-      senioritycell,
-      totalvotescell
-    );
-    tbody.append(row);
   }
+  document.getElementById("load-icon").style.display = "none";
 }
 
 // Filters for party & state
@@ -73,14 +66,17 @@ document.getElementById("ddownstate").addEventListener("change", function() {
 function tablefilter(id) {
   var table = document.getElementById(id);
   var trrow = table.getElementsByTagName("tr");
+  var noresults = true;
+
   var demcheck = document.getElementById("demparty").checked;
   var repcheck = document.getElementById("repparty").checked;
   var indcheck = document.getElementById("indparty").checked;
   var value = document.getElementById("ddownstate").value;
 
   for (i = 0; i < trrow.length; i++) {
-    var tdparty = trrow[i].getElementsByTagName("td")[1].innerText;
+    var tdparty = trrow[i].getElementsByTagName("td")[1].innerHTML;
     var tdstate = trrow[i].getElementsByTagName("td")[2].innerText;
+    console.log(tdparty);
 
     trrow[i].style.display = "none";
 
@@ -91,6 +87,7 @@ function tablefilter(id) {
       (value == "inactive" || value == "AS")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (
       demcheck == false &&
       repcheck == false &&
@@ -98,6 +95,7 @@ function tablefilter(id) {
       tdstate == value
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
@@ -106,8 +104,10 @@ function tablefilter(id) {
       (value == "inactive" || value == "AS")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "D" && demcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
@@ -116,8 +116,10 @@ function tablefilter(id) {
       (value == "inactive" || value == "AS")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "R" && repcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
@@ -126,8 +128,23 @@ function tablefilter(id) {
       (value == "inactive" || value == "AS")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "I" && indcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
+  }
+
+  if (noresults == true) {
+    let tbody = document.getElementById(id);
+    let row = document.createElement("tr");
+    let noresultcell = document.createElement("td");
+
+    noresultcell.setAttribute("colspan", "5");
+
+    noresultcell.innerHTML = "No result matching your request.";
+
+    row.append(noresultcell);
+    tbody.append(row);
   }
 }

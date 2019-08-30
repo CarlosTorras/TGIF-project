@@ -16,6 +16,7 @@
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./styles/extra_style.css" />
     <title>Senate Attendance page</title>
   </head>
 
@@ -137,17 +138,26 @@
                   </tr>
                 </thead>
                 <tbody id="senate_glance">
-                  <tr>
+                  <tr id="loader-icon">
+                    <td colspan="3">
+                      <div class="lds-facebook">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr id="rglance">
                     <td>Republican</td>
                     <td id="repnumbers">--</td>
                     <td id="repvotes">--</td>
                   </tr>
-                  <tr>
+                  <tr id="dglance">
                     <td>Democrat</td>
                     <td id="demnumbers">--</td>
                     <td id="demvotes">--</td>
                   </tr>
-                  <tr>
+                  <tr id="iglance">
                     <td>Independent</td>
                     <td id="indnumbers">--</td>
                     <td id="indvotes">--</td>
@@ -168,7 +178,17 @@
                   <th scope="col">% Missed</th>
                 </tr>
               </thead>
-              <tbody id="leastengaged"></tbody>
+              <tbody id="leastengaged">
+                <tr id="loader-icon2">
+                  <td colspan="3">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div class="table-responsive col-md-6">
@@ -181,7 +201,17 @@
                   <th scope="col">% Missed</th>
                 </tr>
               </thead>
-              <tbody id="mostengaged"></tbody>
+              <tbody id="mostengaged">
+                <tr id="loader-icon3">
+                  <td colspan="3">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

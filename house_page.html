@@ -16,6 +16,7 @@
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./styles/extra_style.css" />
     <title>113 House of Congress</title>
   </head>
 
@@ -225,7 +226,17 @@
                 <th scope="col">Total votes (%)</th>
               </tr>
             </thead>
-            <tbody id="senate-data"></tbody>
+            <tbody id="senate-data">
+              <tr id="load-icon">
+                <td colspan="5">
+                  <div class="lds-facebook">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

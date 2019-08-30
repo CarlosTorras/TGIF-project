@@ -16,6 +16,7 @@
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./styles/extra_style.css" />
     <title>House Party Loyalty page</title>
   </head>
 
@@ -114,31 +115,33 @@
           </div>
           <div class="col-md-6">
             <div class="table-responsive">
-              <h2>Senate at a glance</h2>
+              <h2>House at a glance</h2>
               <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col">Party</th>
-                    <th scope="col">Number of Reps</th>
-                    <th scope="col">% Voted with Prty</th>
-                  </tr>
-                </thead>
-                <tbody id="house_glance">
-                  <tr>
-                    <td>Republican</td>
-                    <td id="repnumbers">--</td>
-                    <td id="repvotes">--</td>
-                  </tr>
-                  <tr>
-                    <td>Democrat</td>
-                    <td id="demnumbers">--</td>
-                    <td id="demvotes">--</td>
-                  </tr>
-                  <tr>
-                    <td>Independent</td>
-                    <td id="indnumbers">--</td>
-                    <td id="indvotes">--</td>
-                  </tr>
+                    <tr id="loader-icon">
+                        <td colspan="3">
+                          <div class="lds-facebook">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr id="rglance">
+                        <td>Republican</td>
+                        <td id="repnumbers">--</td>
+                        <td id="repvotes">--</td>
+                      </tr>
+                      <tr id="dglance">
+                        <td>Democrat</td>
+                        <td id="demnumbers">--</td>
+                        <td id="demvotes">--</td>
+                      </tr>
+                      <tr id="iglance">
+                        <td>Independent</td>
+                        <td id="indnumbers">--</td>
+                        <td id="indvotes">--</td>
+                      </tr>
                 </tbody>
               </table>
             </div>
@@ -155,7 +158,17 @@
                   <th scope="col">% Party Votes</th>
                 </tr>
               </thead>
-              <tbody id="leastloyal"></tbody>
+              <tbody id="leastloyal">
+                  <tr id="loader-icon2">
+                      <td colspan="3">
+                        <div class="lds-facebook">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </td>
+                    </tr>
+              </tbody>
             </table>
           </div>
           <div class="table-responsive col-md-6">
@@ -168,7 +181,17 @@
                   <th scope="col">% Party Votes</th>
                 </tr>
               </thead>
-              <tbody id="mostloyal"></tbody>
+              <tbody id="mostloyal">
+                  <tr id="loader-icon3">
+                      <td colspan="3">
+                        <div class="lds-facebook">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </td>
+                    </tr>
+              </tbody>
             </table>
           </div>
         </div>

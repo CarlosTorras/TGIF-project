@@ -9,9 +9,39 @@ var statistics = {
   leastloyal: 0,
   mostloyal: 0
 };
-let membersarray = data.results[0].members;
 
-memberscount(membersarray);
+let membersarray;
+
+// Start of the fetch function
+
+fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+  method: "GET",
+  headers: { "X-API-key": "ELLwJVAERTRPBpk6kEp4sHgGNdz5jwLTUG8Tq5Uq" }
+})
+  .then(function(tgif) {
+    console.log(tgif);
+    return tgif.json();
+  })
+  .then(function(tgif) {
+    console.log(tgif);
+    membersarray = tgif.results[0].members;
+    //Functions callers
+    //Senate at a glance
+    memberscount(membersarray);
+    voteswparty(membersarray);
+    table2(statistics);
+    // Least Loyal
+    leastloyalarr(membersarray);
+    lloyaltable(statistics.leastloyal, "leastloyal");
+    // Most Loyal
+    mostloyalarr(membersarray);
+    mloyaltable(statistics.mostloyal, "mostloyal");
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+// Info for table at a glance
 
 function memberscount(array) {
   var demlist = [];
@@ -38,9 +68,6 @@ function memberscount(array) {
   statistics.total = demlist.length + replist.length + indlist.length;
 }
 
-//For the table Senate at a glance
-
-voteswparty(membersarray);
 function voteswparty(array) {
   var demsum = 0;
   var repsum = 0;
@@ -62,18 +89,28 @@ function voteswparty(array) {
 }
 
 //Table for senate at a glance
-table2();
 
-function table2() {
-  repnumbers.innerHTML = statistics.republicans;
-  repvotes.innerHTML = statistics.repvoteswparty.toFixed(2) + "%";
-  demnumbers.innerHTML = statistics.democrats;
-  demvotes.innerHTML = statistics.demvoteswparty.toFixed(2) + "%";
-  indnumbers.innerHTML = statistics.independents;
-  indvotes.innerHTML = statistics.indvoteswparty.toFixed(2) + "%";
+document.getElementById("dglance").style.display = "none";
+document.getElementById("rglance").style.display = "none";
+document.getElementById("iglance").style.display = "none";
+
+function table2(object) {
+  repnumbers.innerHTML = object.republicans;
+  repvotes.innerHTML = object.repvoteswparty.toFixed(2) + "%";
+  demnumbers.innerHTML = object.democrats;
+  demvotes.innerHTML = object.demvoteswparty.toFixed(2) + "%";
+  indnumbers.innerHTML = object.independents;
+  indvotes.innerHTML = object.indvoteswparty.toFixed(2) + "%";
+
+  document.getElementById("dglance").style.display = "";
+  document.getElementById("rglance").style.display = "";
+  document.getElementById("iglance").style.display = "";
+
+  document.getElementById("loader-icon").style.display = "none";
 }
 
 //Table for least loyal
+
 function compare2(a, b) {
   if (a.votes_with_party_pct < b.votes_with_party_pct) {
     return -1;
@@ -83,7 +120,6 @@ function compare2(a, b) {
   }
   return 0;
 }
-leastloyalarr(membersarray);
 
 function leastloyalarr(array) {
   array.sort(compare2);
@@ -106,7 +142,6 @@ function leastloyalarr(array) {
   statistics.leastloyal = arr;
 }
 
-lloyaltable(statistics.leastloyal, "leastloyal");
 function lloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
@@ -134,6 +169,8 @@ function lloyaltable(array, id) {
 
     tbody.append(row);
   }
+
+  document.getElementById("loader-icon2").style.display = "none";
 }
 
 //Table for most loyal
@@ -147,7 +184,7 @@ function compareback(a, b) {
   }
   return 0;
 }
-mostloyalarr(membersarray);
+
 function mostloyalarr(array) {
   array.sort(compareback);
 
@@ -169,7 +206,6 @@ function mostloyalarr(array) {
   statistics.mostloyal = arr;
 }
 
-mloyaltable(statistics.mostloyal, "mostloyal");
 function mloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
@@ -197,4 +233,6 @@ function mloyaltable(array, id) {
 
     tbody.append(row);
   }
+
+  document.getElementById("loader-icon3").style.display = "none";
 }
