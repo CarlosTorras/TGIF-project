@@ -88,8 +88,6 @@ function voteswparty(array) {
   statistics.indvoteswparty = indsum / statistics.independents;
 
   for (const key in statistics) {
-    console.log(statistics[key]);
-
     if (isNaN(statistics[key])) {
       statistics[key] = 0;
     }
@@ -101,6 +99,7 @@ function voteswparty(array) {
 document.getElementById("dglance").style.display = "none";
 document.getElementById("rglance").style.display = "none";
 document.getElementById("iglance").style.display = "none";
+document.getElementById("totalglance").style.display = "none";
 
 function table2(object) {
   repnumbers.innerHTML = object.republicans;
@@ -109,10 +108,13 @@ function table2(object) {
   demvotes.innerHTML = object.demvoteswparty.toFixed(2) + "%";
   indnumbers.innerHTML = object.independents;
   indvotes.innerHTML = object.indvoteswparty.toFixed(2) + "%";
+  totalpct.innerHTML =
+    ((object.repvoteswparty + object.demvoteswparty) / 2).toFixed(2) + "%";
 
   document.getElementById("dglance").style.display = "";
   document.getElementById("rglance").style.display = "";
   document.getElementById("iglance").style.display = "";
+  document.getElementById("totalglance").style.display = "";
 
   document.getElementById("loader-icon").style.display = "none";
 }
@@ -131,6 +133,13 @@ function compare2(a, b) {
 
 function leastloyalarr(array) {
   array.sort(compare2);
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].total_votes == array[i].missed_votes) {
+      array.splice(i, 1);
+      i--;
+    }
+  }
 
   var arr = [];
   var tenpct = Math.round(array.length * 0.1);

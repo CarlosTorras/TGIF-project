@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles/extra_style.css" />
+    <title>113 House of Congress</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="d-flex justify-content-between">
+          <img
+            class="img-responsive"
+            src="./img/new_logo.PNG"
+            alt="tgif_logo"
+            width="400"
+          />
+          <div class="align-self-end">
+            <a href="mailto:info@tgif.net"
+              ><i class="fas fa-envelope"></i> info@tgif.net</a
+            >
+          </div>
+        </div>
+
+        <nav
+          class="navbar navbar-expand-sm bg-light navbar-light border border-dark shadow-sm p-2 mb-4 mt-2 rounded"
+        >
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="active nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="#"
+                  id="navbardrop"
+                  >Congress 113<span class="caret"></span
+                ></a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="./senate_page.html">Senate</a>
+                  <a class="active dropdown-item" href="./house_page.html"
+                    >House</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="#"
+                  id="navbardrop"
+                  >Attendance<span class="caret"></span
+                ></a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="./senate_attendance_page.html"
+                    >Senate</a
+                  >
+                  <a class="dropdown-item" href="./house_attendance_page.html"
+                    >House</a
+                  >
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="#"
+                  id="navbardrop"
+                  >Party Loyalty<span class="caret"></span
+                ></a>
+                <div class="dropdown-menu">
+                  <a
+                    class="dropdown-item"
+                    href="./senate_party_loyalty_page.html"
+                    >Senate</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    href="./house_party_loyalty_page.html"
+                    >House</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--Table container-->
+      <div>
+        <h2>Congressmen</h2>
+        <p>
+          The major power of the House is to pass federal legislation that
+          affects the entire country, although its bills must also be passed by
+          the Senate and further agreed to by the U.S. President before becoming
+          law (unless both the House and Senate re-pass the legislation with a
+          two-thirds majority in each chamber). The House has some exclusive
+          powers: the power to initiate revenue bills, to impeach officials
+          (impeached officials are subsequently tried in the Senate), and to
+          elect the U.S. President in case there is no majority in the Electoral
+          College.
+        </p>
+        <p>
+          Each U.S. state is represented in the House in proportion to its
+          population as measured in the census, but every state is entitled to
+          at least one representative.
+        </p>
+        <div id="app">
+          <div class="table-responsive">
+            <div class="caption row">
+              <div class="col-md-6">
+                Filter by Party:
+                <div class="custom-control custom-switch custom-control-inline">
+                  <input
+                    v-model="party"
+                    value="D"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="demparty"
+                  /><label class="custom-control-label" for="demparty"
+                    >Democrat</label
+                  >
+                </div>
+                <div class="custom-control custom-switch custom-control-inline">
+                  <input
+                    v-model="party"
+                    value="R"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="repparty"
+                  /><label class="custom-control-label" for="repparty"
+                    >Republican</label
+                  >
+                </div>
+                <div class="custom-control custom-switch custom-control-inline">
+                  <input
+                    v-model="party"
+                    value="I"
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="indparty"
+                  /><label class="custom-control-label" for="indparty"
+                    >Independent</label
+                  >
+                </div>
+              </div>
+              <div class="col-md-3 offset-md-3">
+                Filter by State:
+                <select name="state" v-model="selected">
+                  <option value="inactive" selected disabled
+                    >select a state</option
+                  >
+                  <option value="AA" id="AA">All States</option>
+                  <option value="AL" id="AL">Alabama</option>
+                  <option value="AK" id="AK">Alaska</option>
+                  <option value="AS" id="AS">American Samoa</option>
+                  <option value="AZ" id="AZ">Arizona</option>
+                  <option value="AR" id="AR">Arkansas</option>
+                  <option value="CA" id="CA">California</option>
+                  <option value="CO" id="CO">Colorado</option>
+                  <option value="CT" id="CT">Connecticut</option>
+                  <option value="DE" id="DE">Delaware</option>
+                  <option value="DC" id="DC">District of Columbia</option>
+                  <option value="FL" id="FL">Florida</option>
+                  <option value="GA" id="GA">Georgia</option>
+                  <option value="GU" id="GU">Guam</option>
+                  <option value="HI" id="HI">Hawaii</option>
+                  <option value="ID" id="ID">Idaho</option>
+                  <option value="IL" id="IL">Illinois</option>
+                  <option value="IN" id="IN">Indiana</option>
+                  <option value="IA" id="IA">Iowa</option>
+                  <option value="KS" id="KS">Kansas</option>
+                  <option value="KY" id="KY">Kentucky</option>
+                  <option value="LA" id="LA">Louisiana</option>
+                  <option value="ME" id="ME">Maine</option>
+                  <option value="MD" id="MD">Maryland</option>
+                  <option value="MA" id="MA">Massachussetts</option>
+                  <option value="MI" id="MI">Michigan</option>
+                  <option value="MN" id="MN">Minnesota</option>
+                  <option value="MO" id="MO">Missouri</option>
+                  <option value="MT" id="MT">Montana</option>
+                  <option value="NE" id="NE">Nebraska</option>
+                  <option value="NV" id="NV">Nevada</option>
+                  <option value="NH" id="NH">New Hampshire</option>
+                  <option value="NJ" id="NJ">New Jersey</option>
+                  <option value="NM" id="NM">New Mexico</option>
+                  <option value="NY" id="NY">New York</option>
+                  <option value="MP" id="MP">Nothern Mariana Islands</option>
+                  <option value="NC" id="NC">North Carolina</option>
+                  <option value="ND" id="ND">North Dakota</option>
+                  <option value="OH" id="OH">Ohio</option>
+                  <option value="OK" id="OK">Oklahoma</option>
+                  <option value="OR" id="OR">Oregon</option>
+                  <option value="PA" id="PA">Pennsylvania</option>
+                  <option value="PR" id="PR">Puerto Rico</option>
+                  <option value="RI" id="RI">Rhode Island</option>
+                  <option value="SC" id="SC">South Carolina</option>
+                  <option value="SD" id="SD">South Dakota</option>
+                  <option value="TN" id="TN">Tennessee</option>
+                  <option value="TX" id="TX">Texas</option>
+                  <option value="VI" id="VI">U.S. Virgin Islands</option>
+                  <option value="UT" id="UT">Utah</option>
+                  <option value="VT" id="VT">Vermont</option>
+                  <option value="VA" id="VA">Virginia</option>
+                  <option value="WA" id="WA">Washington</option>
+                  <option value="WV" id="WV">West Virginia</option>
+                  <option value="WI" id="WI">Wisconsin</option>
+                  <option value="WY" id="WY">Wyoming</option>
+                </select>
+              </div>
+            </div>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Full name</th>
+                  <th scope="col">Party</th>
+                  <th scope="col">State</th>
+                  <th scope="col">Seniority</th>
+                  <th scope="col">Total votes (%)</th>
+                </tr>
+              </thead>
+              <tbody id="senate-data">
+                <tr v-for="member in getMembers">
+                  <td>
+                    <a v-bind:href="member.url" target="_blank"
+                      >{{ member.first_name }} {{ member.last_name }}
+                      {{ member.middle_name }}</a
+                    >
+                  </td>
+                  <td>{{ member.party }}</td>
+                  <td>{{ member.state }}</td>
+                  <td>{{ member.seniority }}</td>
+                  <td>{{ member.votes_with_party_pct }} %</td>
+                </tr>
+
+                <tr v-if="loading===true" id="load-icon">
+                  <td colspan="5">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr v-if="getMembers==''">
+                  <td colspan="5">
+                    NO RESULTS FOUND MATCHING YOUR REQUEST.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <footer
+        class="footer-copyright d-flex justify-content-center align-items-center border border-dark shadow-sm bg-light p-2 mb-4 mt-4 rounded"
+      >
+        <p>&copy; 2019 TGIF: All Rights Reserved</p>
+      </footer>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./javascript/main_vue.js"></script>
+  </body>
+</html>

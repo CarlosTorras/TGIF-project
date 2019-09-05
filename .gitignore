@@ -1,1 +1,8 @@
 .vscode/settings.json
+
+javascript/senate_table.js
+javascript/senate_party_loyalty.js
+javascript/senate_attendance.js
+javascript/house_table.js
+javascript/house_party_loyalty.js
+javascript/house_attendance.js

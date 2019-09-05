@@ -118,30 +118,42 @@
               <h2>House at a glance</h2>
               <table class="table">
                 <thead>
-                    <tr id="loader-icon">
-                        <td colspan="3">
-                          <div class="lds-facebook">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr id="rglance">
-                        <td>Republican</td>
-                        <td id="repnumbers">--</td>
-                        <td id="repvotes">--</td>
-                      </tr>
-                      <tr id="dglance">
-                        <td>Democrat</td>
-                        <td id="demnumbers">--</td>
-                        <td id="demvotes">--</td>
-                      </tr>
-                      <tr id="iglance">
-                        <td>Independent</td>
-                        <td id="indnumbers">--</td>
-                        <td id="indvotes">--</td>
-                      </tr>
+                  <tr>
+                    <th scope="col">Party</th>
+                    <th scope="col">Number of Reps</th>
+                    <th scope="col">% Voted with Prty</th>
+                  </tr>
+                </thead>
+                <tbody id="house_glance">
+                  <tr id="loader-icon">
+                    <td colspan="3">
+                      <div class="lds-facebook">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr id="rglance">
+                    <td>Republican</td>
+                    <td id="repnumbers">--</td>
+                    <td id="repvotes">--</td>
+                  </tr>
+                  <tr id="dglance">
+                    <td>Democrat</td>
+                    <td id="demnumbers">--</td>
+                    <td id="demvotes">--</td>
+                  </tr>
+                  <tr id="iglance">
+                    <td>Independent</td>
+                    <td id="indnumbers">--</td>
+                    <td id="indvotes">--</td>
+                  </tr>
+                  <tr id="totalglance">
+                    <td>Total members</td>
+                    <td>450</td>
+                    <td id="totalpct">--</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -159,15 +171,15 @@
                 </tr>
               </thead>
               <tbody id="leastloyal">
-                  <tr id="loader-icon2">
-                      <td colspan="3">
-                        <div class="lds-facebook">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      </td>
-                    </tr>
+                <tr id="loader-icon2">
+                  <td colspan="3">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -182,22 +194,22 @@
                 </tr>
               </thead>
               <tbody id="mostloyal">
-                  <tr id="loader-icon3">
-                      <td colspan="3">
-                        <div class="lds-facebook">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      </td>
-                    </tr>
+                <tr id="loader-icon3">
+                  <td colspan="3">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
       <footer
-        class="footer-copyright d-flex justify-content-center align-items-center border border-dark shadow-sm p-2 mb-4 mt-4 rounded"
+        class="footer-copyright d-flex justify-content-center align-items-center border border-dark bg-light shadow-sm p-2 mb-4 mt-4 rounded"
       >
         <p>
           &copy; 2019 TGIF | All Rights Reserved
@@ -219,7 +231,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="./javascript/pro_congress_113_house.js"></script>
-    <script src="./javascript/house_party_loyalty.js"></script>
+
+    <script src="./javascript/party_loyalty.js"></script>
   </body>
 </html>

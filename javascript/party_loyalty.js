@@ -6,15 +6,25 @@ var statistics = {
   demvoteswparty: 0,
   repvoteswparty: 0,
   indvoteswparty: 0,
-  mostengaged: 0,
-  leastengaged: 0
+  leastloyal: 0,
+  mostloyal: 0
 };
 
 let membersarray;
 
-// Start of the fetch function
+// Start of fetch
 
-fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+let url;
+
+if (window.location.pathname.includes("house")) {
+  url = "https://api.propublica.org/congress/v1/113/house/members.json";
+} else {
+  url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+}
+
+// Fetch caller
+
+fetch(url, {
   method: "GET",
   headers: { "X-API-key": "ELLwJVAERTRPBpk6kEp4sHgGNdz5jwLTUG8Tq5Uq" }
 })
@@ -29,13 +39,13 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
     // Table at a glance
     memberscount(membersarray);
     voteswparty(membersarray);
-    table2(statistics);
-    // Least Engaged
-    statsleastengaged(membersarray);
-    leastengaged(statistics.leastengaged, "leastengaged");
-    // Most Engaged
-    statsmostengaged(membersarray);
-    mostengaged(statistics.mostengaged, "mostengaged");
+    glancetable(statistics);
+    // Least Loyal
+    leastloyalarr(membersarray);
+    lloyaltable(statistics.leastloyal, "leastloyal");
+    // Most Loyal
+    mostloyalarr(membersarray);
+    mloyaltable(statistics.mostloyal, "mostloyal");
   })
   .catch(function(error) {
     console.log(error);
@@ -101,7 +111,7 @@ document.getElementById("rglance").style.display = "none";
 document.getElementById("iglance").style.display = "none";
 document.getElementById("totalglance").style.display = "none";
 
-function table2(object) {
+function glancetable(object) {
   repnumbers.innerHTML = object.republicans;
   repvotes.innerHTML = object.repvoteswparty.toFixed(2) + "%";
   demnumbers.innerHTML = object.democrats;
@@ -109,7 +119,10 @@ function table2(object) {
   indnumbers.innerHTML = object.independents;
   indvotes.innerHTML = object.indvoteswparty.toFixed(2) + "%";
   totalpct.innerHTML =
-    ((object.repvoteswparty + object.demvoteswparty) / 2).toFixed(2) + "%";
+    (
+      (object.repvoteswparty + object.demvoteswparty + object.indvoteswparty) /
+      3
+    ).toFixed(2) + "%";
 
   document.getElementById("dglance").style.display = "";
   document.getElementById("rglance").style.display = "";
@@ -119,20 +132,20 @@ function table2(object) {
   document.getElementById("loader-icon").style.display = "none";
 }
 
-//Table for least engaged
+//Table for least loyal
 
-function compare(a, b) {
-  if (a.missed_votes_pct > b.missed_votes_pct) {
+function compare2(a, b) {
+  if (a.votes_with_party_pct < b.votes_with_party_pct) {
     return -1;
   }
-  if (a.missed_votes_pct < b.missed_votes_pct) {
+  if (a.votes_with_party_pct > b.votes_with_party_pct) {
     return 1;
   }
   return 0;
 }
 
-function statsleastengaged(array) {
-  array.sort(compare);
+function leastloyalarr(array) {
+  array.sort(compare2);
 
   for (let i = 0; i < array.length; i++) {
     if (array[i].total_votes == array[i].missed_votes) {
@@ -141,24 +154,25 @@ function statsleastengaged(array) {
     }
   }
 
-  var tenpct = Math.round(array.length * 0.1);
   var arr = [];
+  var tenpct = Math.round(array.length * 0.1);
+
   for (i = 0; i < tenpct; i++) {
     arr.push(array[i]);
   }
 
-  for (let i = tenpct - 1; i < array.length; i++) {
+  for (let i = tenpct + 1; i < array.length; i++) {
     if (
-      array[i].missed_votes_pct == arr[arr.length - 1].missed_votes_pct &&
-      array[i].first_name !== arr[arr.length - 1].first_name
+      array[i].votes_with_party_pct == arr[arr.length - 1].votes_with_party_pct
     ) {
       arr.push(array[i]);
     }
   }
-  statistics.leastengaged = arr;
+
+  statistics.leastloyal = arr;
 }
 
-function leastengaged(array, id) {
+function lloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
   for (let i = 0; i < array.length; i++) {
@@ -171,10 +185,15 @@ function leastengaged(array, id) {
     if (array[i].middle_name !== null) {
       name += " " + array[i].middle_name;
     }
+    var votes_w_party = Math.round(
+      ((array[i].total_votes - array[i].missed_votes) *
+        array[i].votes_with_party_pct) /
+        100
+    );
 
     fullnamecell.innerHTML = name;
-    missedvotescell.innerHTML = array[i].missed_votes;
-    missedprctcell.innerHTML = array[i].missed_votes_pct + "%";
+    missedvotescell.innerHTML = votes_w_party;
+    missedprctcell.innerHTML = array[i].votes_with_party_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 
@@ -184,48 +203,40 @@ function leastengaged(array, id) {
   document.getElementById("loader-icon2").style.display = "none";
 }
 
-//Table for most engaged
+//Table for most loyal
 
-function compare2(a, b) {
-  if (a.missed_votes_pct < b.missed_votes_pct) {
+function compareback(a, b) {
+  if (a.votes_with_party_pct > b.votes_with_party_pct) {
     return -1;
   }
-  if (a.missed_votes_pct > b.missed_votes_pct) {
+  if (a.votes_with_party_pct < b.votes_with_party_pct) {
     return 1;
   }
   return 0;
 }
 
-function statsmostengaged(array) {
-  array.sort(compare2);
+function mostloyalarr(array) {
+  array.sort(compareback);
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].total_votes == array[i].missed_votes) {
-      array.splice(i, 1);
-      i--;
-    }
-  }
-
+  var arr = [];
   var tenpct = Math.round(array.length * 0.1);
-  var tenpctarr = [];
+
   for (i = 0; i < tenpct; i++) {
-    tenpctarr.push(array[i]);
+    arr.push(array[i]);
   }
 
-  for (let i = tenpct - 1; i < array.length; i++) {
+  for (let i = tenpct + 1; i < array.length; i++) {
     if (
-      array[i].missed_votes_pct ==
-        tenpctarr[tenpctarr.length - 1].missed_votes_pct &&
-      array[i].first_name !== tenpctarr[tenpctarr.length - 1].first_name
+      array[i].votes_with_party_pct == arr[arr.length - 1].votes_with_party_pct
     ) {
-      tenpctarr.push(array[i]);
+      arr.push(array[i]);
     }
   }
 
-  statistics.mostengaged = tenpctarr;
+  statistics.mostloyal = arr;
 }
 
-function mostengaged(array, id) {
+function mloyaltable(array, id) {
   let tbody = document.getElementById(id);
 
   for (let i = 0; i < array.length; i++) {
@@ -234,14 +245,19 @@ function mostengaged(array, id) {
     let missedvotescell = document.createElement("td");
     let missedprctcell = document.createElement("td");
 
-    var name2 = array[i].first_name + " " + array[i].last_name;
+    var name = array[i].first_name + " " + array[i].last_name;
     if (array[i].middle_name !== null) {
       name += " " + array[i].middle_name;
     }
+    var votes_w_party = Math.round(
+      ((array[i].total_votes - array[i].missed_votes) *
+        array[i].votes_with_party_pct) /
+        100
+    );
 
-    fullnamecell.innerHTML = name2;
-    missedvotescell.innerHTML = array[i].missed_votes;
-    missedprctcell.innerHTML = array[i].missed_votes_pct + "%";
+    fullnamecell.innerHTML = name;
+    missedvotescell.innerHTML = votes_w_party;
+    missedprctcell.innerHTML = array[i].votes_with_party_pct + "%";
 
     row.append(fullnamecell, missedvotescell, missedprctcell);
 

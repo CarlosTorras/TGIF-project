@@ -1,3 +1,9 @@
+/* Message for noresults */
+#noresults {
+  display: none;
+  text-align: center;
+}
+
 /* tables */
 table {
   text-align: center;

@@ -1,8 +1,18 @@
 let membersarray;
 
-// Start of the fetch function
+// Start of fetch
 
-fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+let url;
+
+if (window.location.pathname.includes("house")) {
+  url = "https://api.propublica.org/congress/v1/113/house/members.json";
+} else {
+  url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+}
+
+// Fetch caller
+
+fetch(url, {
   method: "GET",
   headers: { "X-API-key": "ELLwJVAERTRPBpk6kEp4sHgGNdz5jwLTUG8Tq5Uq" }
 })
@@ -22,7 +32,7 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
 
 // End of the fetch function
 
-// Function for House members table
+// Function for members table
 
 function printtable(array, id) {
   let tbody = document.getElementById(id);
@@ -48,6 +58,250 @@ function printtable(array, id) {
   document.getElementById("load-icon").style.display = "none";
 }
 
+// Dropdown menu
+
+let statesarray = [
+  {
+    name: "Alabama",
+    abbreviation: "AL"
+  },
+  {
+    name: "Alaska",
+    abbreviation: "AK"
+  },
+  {
+    name: "American Samoa",
+    abbreviation: "AS"
+  },
+  {
+    name: "Arizona",
+    abbreviation: "AZ"
+  },
+  {
+    name: "Arkansas",
+    abbreviation: "AR"
+  },
+  {
+    name: "California",
+    abbreviation: "CA"
+  },
+  {
+    name: "Colorado",
+    abbreviation: "CO"
+  },
+  {
+    name: "Connecticut",
+    abbreviation: "CT"
+  },
+  {
+    name: "Delaware",
+    abbreviation: "DE"
+  },
+  {
+    name: "District Of Columbia",
+    abbreviation: "DC"
+  },
+  {
+    name: "Florida",
+    abbreviation: "FL"
+  },
+  {
+    name: "Georgia",
+    abbreviation: "GA"
+  },
+  {
+    name: "Guam",
+    abbreviation: "GU"
+  },
+  {
+    name: "Hawaii",
+    abbreviation: "HI"
+  },
+  {
+    name: "Idaho",
+    abbreviation: "ID"
+  },
+  {
+    name: "Illinois",
+    abbreviation: "IL"
+  },
+  {
+    name: "Indiana",
+    abbreviation: "IN"
+  },
+  {
+    name: "Iowa",
+    abbreviation: "IA"
+  },
+  {
+    name: "Kansas",
+    abbreviation: "KS"
+  },
+  {
+    name: "Kentucky",
+    abbreviation: "KY"
+  },
+  {
+    name: "Louisiana",
+    abbreviation: "LA"
+  },
+  {
+    name: "Maine",
+    abbreviation: "ME"
+  },
+  {
+    name: "Maryland",
+    abbreviation: "MD"
+  },
+  {
+    name: "Massachusetts",
+    abbreviation: "MA"
+  },
+  {
+    name: "Michigan",
+    abbreviation: "MI"
+  },
+  {
+    name: "Minnesota",
+    abbreviation: "MN"
+  },
+  {
+    name: "Mississippi",
+    abbreviation: "MS"
+  },
+  {
+    name: "Missouri",
+    abbreviation: "MO"
+  },
+  {
+    name: "Montana",
+    abbreviation: "MT"
+  },
+  {
+    name: "Nebraska",
+    abbreviation: "NE"
+  },
+  {
+    name: "Nevada",
+    abbreviation: "NV"
+  },
+  {
+    name: "New Hampshire",
+    abbreviation: "NH"
+  },
+  {
+    name: "New Jersey",
+    abbreviation: "NJ"
+  },
+  {
+    name: "New Mexico",
+    abbreviation: "NM"
+  },
+  {
+    name: "New York",
+    abbreviation: "NY"
+  },
+  {
+    name: "North Carolina",
+    abbreviation: "NC"
+  },
+  {
+    name: "North Dakota",
+    abbreviation: "ND"
+  },
+  {
+    name: "Northern Mariana Islands",
+    abbreviation: "MP"
+  },
+  {
+    name: "Ohio",
+    abbreviation: "OH"
+  },
+  {
+    name: "Oklahoma",
+    abbreviation: "OK"
+  },
+  {
+    name: "Oregon",
+    abbreviation: "OR"
+  },
+  {
+    name: "Pennsylvania",
+    abbreviation: "PA"
+  },
+  {
+    name: "Puerto Rico",
+    abbreviation: "PR"
+  },
+  {
+    name: "Rhode Island",
+    abbreviation: "RI"
+  },
+  {
+    name: "South Carolina",
+    abbreviation: "SC"
+  },
+  {
+    name: "South Dakota",
+    abbreviation: "SD"
+  },
+  {
+    name: "Tennessee",
+    abbreviation: "TN"
+  },
+  {
+    name: "Texas",
+    abbreviation: "TX"
+  },
+  {
+    name: "Utah",
+    abbreviation: "UT"
+  },
+  {
+    name: "Vermont",
+    abbreviation: "VT"
+  },
+  {
+    name: "Virgin Islands",
+    abbreviation: "VI"
+  },
+  {
+    name: "Virginia",
+    abbreviation: "VA"
+  },
+  {
+    name: "Washington",
+    abbreviation: "WA"
+  },
+  {
+    name: "West Virginia",
+    abbreviation: "WV"
+  },
+  {
+    name: "Wisconsin",
+    abbreviation: "WI"
+  },
+  {
+    name: "Wyoming",
+    abbreviation: "WY"
+  }
+];
+
+statesdropdown(statesarray);
+
+function statesdropdown(array) {
+  let sbody = document.getElementById("ddownstate");
+
+  for (let i = 0; i < array.length; i++) {
+    let option = document.createElement("option");
+
+    option.innerHTML = array[i].name;
+
+    option.setAttribute("value", array[i].abbreviation);
+
+    sbody.append(option);
+  }
+}
 // Filters for party & state
 
 document.getElementById("demparty").addEventListener("click", function() {

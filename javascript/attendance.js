@@ -12,9 +12,19 @@ var statistics = {
 
 let membersarray;
 
-// Start of the fetch function
+// Start of fetch
 
-fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+let url;
+
+if (window.location.pathname.includes("house")) {
+  url = "https://api.propublica.org/congress/v1/113/house/members.json";
+} else {
+  url = "https://api.propublica.org/congress/v1/113/senate/members.json";
+}
+
+// Fetch caller
+
+fetch(url, {
   method: "GET",
   headers: { "X-API-key": "ELLwJVAERTRPBpk6kEp4sHgGNdz5jwLTUG8Tq5Uq" }
 })
@@ -29,7 +39,7 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
     // Table at a glance
     memberscount(membersarray);
     voteswparty(membersarray);
-    table2(statistics);
+    glancetable(statistics);
     // Least Engaged
     statsleastengaged(membersarray);
     leastengaged(statistics.leastengaged, "leastengaged");
@@ -41,7 +51,7 @@ fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
     console.log(error);
   });
 
-//For the table House at a glance
+//For the table Senate at a glance
 
 function memberscount(array) {
   var demlist = [];
@@ -94,14 +104,14 @@ function voteswparty(array) {
   }
 }
 
-//Table for House at a glance
+//Table for at a glance
 
 document.getElementById("dglance").style.display = "none";
 document.getElementById("rglance").style.display = "none";
 document.getElementById("iglance").style.display = "none";
 document.getElementById("totalglance").style.display = "none";
 
-function table2(object) {
+function glancetable(object) {
   repnumbers.innerHTML = object.republicans;
   repvotes.innerHTML = object.repvoteswparty.toFixed(2) + "%";
   demnumbers.innerHTML = object.democrats;
@@ -109,7 +119,10 @@ function table2(object) {
   indnumbers.innerHTML = object.independents;
   indvotes.innerHTML = object.indvoteswparty.toFixed(2) + "%";
   totalpct.innerHTML =
-    ((object.repvoteswparty + object.demvoteswparty) / 2).toFixed(2) + "%";
+    (
+      (object.repvoteswparty + object.demvoteswparty + object.indvoteswparty) /
+      3
+    ).toFixed(2) + "%";
 
   document.getElementById("dglance").style.display = "";
   document.getElementById("rglance").style.display = "";
@@ -134,18 +147,12 @@ function compare(a, b) {
 function statsleastengaged(array) {
   array.sort(compare);
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].total_votes == array[i].missed_votes) {
-      array.splice(i, 1);
-      i--;
-    }
-  }
-
   var tenpct = Math.round(array.length * 0.1);
   var arr = [];
   for (i = 0; i < tenpct; i++) {
     arr.push(array[i]);
   }
+  console.log(arr);
 
   for (let i = tenpct - 1; i < array.length; i++) {
     if (
@@ -199,18 +206,12 @@ function compare2(a, b) {
 function statsmostengaged(array) {
   array.sort(compare2);
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].total_votes == array[i].missed_votes) {
-      array.splice(i, 1);
-      i--;
-    }
-  }
-
   var tenpct = Math.round(array.length * 0.1);
   var tenpctarr = [];
   for (i = 0; i < tenpct; i++) {
     tenpctarr.push(array[i]);
   }
+  console.log(tenpctarr);
 
   for (let i = tenpct - 1; i < array.length; i++) {
     if (

@@ -93,6 +93,7 @@ function voteswparty(array) {
 document.getElementById("dglance").style.display = "none";
 document.getElementById("rglance").style.display = "none";
 document.getElementById("iglance").style.display = "none";
+document.getElementById("totalglance").style.display = "none";
 
 function table2(object) {
   repnumbers.innerHTML = object.republicans;
@@ -101,10 +102,16 @@ function table2(object) {
   demvotes.innerHTML = object.demvoteswparty.toFixed(2) + "%";
   indnumbers.innerHTML = object.independents;
   indvotes.innerHTML = object.indvoteswparty.toFixed(2) + "%";
+  totalpct.innerHTML =
+    (
+      (object.repvoteswparty + object.demvoteswparty + object.indvoteswparty) /
+      3
+    ).toFixed(2) + "%";
 
   document.getElementById("dglance").style.display = "";
   document.getElementById("rglance").style.display = "";
   document.getElementById("iglance").style.display = "";
+  document.getElementById("totalglance").style.display = "";
 
   document.getElementById("loader-icon").style.display = "none";
 }

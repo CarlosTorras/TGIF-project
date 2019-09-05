@@ -72,8 +72,10 @@ function tablefilter(id) {
   var indcheck = document.getElementById("indparty").checked;
   var value = document.getElementById("ddownstate").value;
 
-  for (i = 0; i < trrow.length; i++) {
-    var tdparty = trrow[i].getElementsByTagName("td")[1].innerText;
+  var noresults = true;
+
+  for (i = 0; i < trrow.length - 1; i++) {
+    var tdparty = trrow[i].getElementsByTagName("td")[1].innerHTML;
     var tdstate = trrow[i].getElementsByTagName("td")[2].innerText;
 
     trrow[i].style.display = "none";
@@ -82,9 +84,10 @@ function tablefilter(id) {
       demcheck == false &&
       repcheck == false &&
       indcheck == false &&
-      (value == "inactive" || value == "AS")
+      (value == "inactive" || value == "AA")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (
       demcheck == false &&
       repcheck == false &&
@@ -92,36 +95,49 @@ function tablefilter(id) {
       tdstate == value
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
       tdparty == "D" &&
       demcheck == true &&
-      (value == "inactive" || value == "AS")
+      (value == "inactive" || value == "AA")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "D" && demcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
       tdparty == "R" &&
       repcheck == true &&
-      (value == "inactive" || value == "AS")
+      (value == "inactive" || value == "AA")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "R" && repcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
 
     if (
       tdparty == "I" &&
       indcheck == true &&
-      (value == "inactive" || value == "AS")
+      (value == "inactive" || value == "AA")
     ) {
       trrow[i].style.display = "";
+      noresults = false;
     } else if (tdstate == value && tdparty == "I" && indcheck == true) {
       trrow[i].style.display = "";
+      noresults = false;
     }
+  }
+
+  if (noresults == true) {
+    document.getElementById("noresults").style.display = "block";
+  } else if (noresults == false) {
+    document.getElementById("noresults").style.display = "none";
   }
 }
